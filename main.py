@@ -71,19 +71,3 @@ elif selected == "Run File 3":
     run_file3()
     st.write("Marketing Roadmap Creator is running...")
 
-# Add footer or any additional UI elements as needed
-st.markdown("""
-    <style>
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            padding: 10px;
-            background-color: #f1f1f1;
-        }
-    </style>
-    <div class="footer">
-        <p>&copy; 2024 Crew AI. All rights reserved.</p>
-    </div>
-""", unsafe_allow_html=True)

@@ -15,7 +15,7 @@ os.environ['GROQ_API_KEY'] = "gsk_MctKrv2xYSl8fLfVZe0cWGdyb3FYhGjtJe39pJg93knmct
 os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
 # Initialize the LLM
-llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
+llm = ChatGroq(temperature=0.2, model_name="llama3-8b-8192")
 
 
 # --------- Tools ---------#
@@ -79,7 +79,7 @@ market_researcher = Agent(
         SearchTools.open_page,
     ],
     llm=llm,
-    max_iter=4,
+    #max_iter=4,
     max_rpm=4000,
     allow_delegation=True
 )
@@ -109,7 +109,7 @@ writer = Agent(
     ),
     tools=[],
     llm=llm,
-    max_iter=4,
+    #max_iter=4,
     max_rpm=4000,
     allow_delegation=True
 )
@@ -161,8 +161,8 @@ writing = Task(
 )
 
 crew = Crew(
-    agents=[market_researcher, content_strategist,writer],
-    tasks=[market_research, content_strategy, writing],
+    agents=[market_researcher,writer],
+    tasks=[market_research, writing],
     process=Process.sequential,
 )
 
