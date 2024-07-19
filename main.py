@@ -13,7 +13,7 @@ def run_file2():
 
 
 def run_file3():
-    subprocess.run(["streamlit", "run", "marketing_plan.py"])
+    subprocess.run(["streamlit", "run", "markerting_plan.py"])
 
 
 # Streamlit UI
