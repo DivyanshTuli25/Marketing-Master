@@ -48,8 +48,8 @@ if selected == "Home":
         llm=llm,
         allow_delegation=True,
         tools=[tool],
-        max_iter = 7,
-        max_rpm = 4000
+        # max_iter = 7,
+        # max_rpm = 4000
     )
 
 
@@ -63,8 +63,8 @@ if selected == "Home":
         llm=llm,
         allow_delegation=False,
         tools=[],
-        max_iter=7,
-        max_rpm=4000
+        # max_iter=7,
+        # max_rpm=4000
 
     )
 
