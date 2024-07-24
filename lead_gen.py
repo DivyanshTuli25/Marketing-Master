@@ -175,20 +175,20 @@ class LeadSearchTools:
         """Search news articles. This tool returns 5 results from news sources."""
         return LeadSearchTools.search(f"site:news.google.com {query}", limit=5)
 
-    @tool('search_reddit')
-    def search_reddit(query: str) -> str:
-        """Search Reddit. This tool returns 5 results from Reddit."""
-        return LeadSearchTools.search(f"site:reddit.com {query}", limit=5)
+    # @tool('search_reddit')
+    # def search_reddit(query: str) -> str:
+    #     """Search Reddit. This tool returns 5 results from Reddit."""
+    #     return LeadSearchTools.search(f"site:reddit.com {query}", limit=5)
 
     @tool('search_justdial')
     def search_justdial(query: str) -> str:
         """Search JustDial. This tool returns 5 results from JustDial."""
-        return LeadSearchTools.search(f"site:justdial.com {query}", limit=5)
+        return LeadSearchTools.search(f"site:https://www.justdial.com/ {query}", limit=5)
 
     @tool('search_indiamart')
     def search_indiamart(query: str) -> str:
         """Search IndiaMart. This tool returns 5 results from IndiaMart."""
-        return LeadSearchTools.search(f"site:indiamart.com {query}", limit=5)
+        return LeadSearchTools.search(f"site:https://www.indiamart.com/ {query}", limit=5)
 
     @tool('open_page')
     def open_page(url: str) -> str:
