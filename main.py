@@ -66,7 +66,7 @@ elif selected == "Run Insta Content":
     st.write("Instagram Content module is running...")
 
 # Run File 3
-elif selected == "Run File 3":
+elif selected == "Marketing Roadmap":
     st.title("Run File 3 Module")
     run_file3()
     st.write("Marketing Roadmap Creator is running...")

@@ -31,7 +31,7 @@ if selected == "Home":
     # Initialize the tool for internet searching capabilities
     tool = SerperDevTool()
 
-    os.environ["GROQ_API_KEY"] = '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'
+    os.environ["GROQ_API_KEY"] = os.getenv('GROQ_API_KEY_2')
     llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
 
     avators = {
