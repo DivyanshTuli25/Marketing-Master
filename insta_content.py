@@ -166,28 +166,4 @@ crew = Crew(
     process=Process.sequential,
 )
 
-# Streamlit UI
-st.title('Instagram Content Strategy Generator')
 
-instagram_description = st.text_input('Instagram Account Description', 'Electronic waste')
-current_date = st.date_input('Current Date', datetime.date.today())
-
-if st.button('Generate Strategy'):
-    inputs = {
-        'current_date': current_date.strftime('%Y/%m/%d'),
-        'instagram_description': instagram_description
-    }
-
-    with st.spinner('Generating strategy...'):
-        crew.kickoff(inputs=inputs)
-
-    # Read and display the content of market_research.md
-    with open('market_research.md', 'r') as file:
-        market_research_content = file.read()
-
-    st.markdown("### Market Research Report")
-    st.markdown(market_research_content)
-
-    st.markdown("### Final Result")
-    result = crew.kickoff(inputs=inputs)
-    st.markdown(result)
