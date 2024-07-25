@@ -1,12 +1,10 @@
 import streamlit as st
 from streamlit_option_menu import option_menu
 import subprocess
-import streamlit as st
 import datetime
 import os
 import requests
 import json
-import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 from crewai import Agent, Task, Crew, Process
 from dotenv import load_dotenv
@@ -16,9 +14,7 @@ from langchain_community.document_loaders import WebBaseLoader
 import streamlit as st
 import os
 from crewai import Crew, Process, Agent, Task
-from langchain_core.callbacks import BaseCallbackHandler
-from typing import TYPE_CHECKING, Any, Dict, Optional
-from langchain_openai import ChatOpenAI
+
 from langchain_groq import ChatGroq
 from crewai_tools import SerperDevTool
 from streamlit_option_menu import option_menu
@@ -45,30 +41,20 @@ class LeadSearchTools:
         """Search Facebook groups. This tool returns 5 results from Facebook groups."""
         return LeadSearchTools.search(f"site:facebook.com/groups {query}", limit=5)
 
-    @tool('search_twitter')
-    def search_twitter(query: str) -> str:
-        """Search Twitter. This tool returns 5 results from Twitter."""
-        return LeadSearchTools.search(f"site:twitter.com {query}", limit=5)
-
     @tool('search_news')
     def search_news(query: str) -> str:
         """Search news articles. This tool returns 5 results from news sources."""
         return LeadSearchTools.search(f"site:news.google.com {query}", limit=5)
 
-    # @tool('search_reddit')
-    # def search_reddit(query: str) -> str:
-    #     """Search Reddit. This tool returns 5 results from Reddit."""
-    #     return LeadSearchTools.search(f"site:reddit.com {query}", limit=5)
-
     @tool('search_justdial')
     def search_justdial(query: str) -> str:
         """Search JustDial. This tool returns 5 results from JustDial."""
-        return LeadSearchTools.search(f"site:https://www.justdial.com/ {query}", limit=5)
+        return LeadSearchTools.search(f"site:justdial.com {query}", limit=10)
 
     @tool('search_indiamart')
     def search_indiamart(query: str) -> str:
         """Search IndiaMart. This tool returns 5 results from IndiaMart."""
-        return LeadSearchTools.search(f"site:https://www.indiamart.com/ {query}", limit=5)
+        return LeadSearchTools.search(f"site:indiamart.com {query}", limit=10)
 
     @tool('open_page')
     def open_page(url: str) -> str:
@@ -87,36 +73,35 @@ class LeadSearchTools:
             'Content-Type': 'application/json'
         }
         try:
-            response = requests.request("POST", url, headers=headers, data=payload, timeout=10)
+            response = requests.post(url, headers=headers, data=payload, timeout=10)
             response.raise_for_status()
             results = response.json().get('organic', [])
             if not results:
                 return "No results found."
 
-            string = []
+            results_list = []
             for result in results:
-                string.append(f"{result['title']}\n{result['snippet']}\n{result['link']}\n\n")
+                results_list.append(f"{result['title']}\n{result['snippet']}\n{result['link']}\n\n")
 
-            return f"Search results for '{query}':\n\n" + "\n".join(string)
+            return f"Search results for '{query}':\n\n" + "\n".join(results_list)
         except requests.Timeout:
             return "The request timed out. Please try again."
         except requests.RequestException as e:
             return f"An error occurred: {str(e)}"
 
+
 # Define the Lead Generation Agent
 lead_generator = Agent(
     role='Lead Generator',
-    goal='Identify and list potential leads from various online sources relevant to the product or business. Focus on finding groups and connections where potential customers or business partners might be active.',
+    goal='Identify and list potential leads from various online sources relevant to the product or business. Focus on finding buyers, sellers, dealers or groups and connections where potential customers or business partners might be active.',
     backstory=(
         "With expertise in social and professional networks, you excel at identifying potential leads within various online sources. Your ability to find relevant buyers and partners makes you invaluable for generating business leads."
     ),
     tools=[
-        LeadSearchTools.search_facebook_groups,
-        LeadSearchTools.search_twitter,
-        LeadSearchTools.search_news,
-        # LeadSearchTools.search_reddit,
         LeadSearchTools.search_justdial,
         LeadSearchTools.search_indiamart,
+        LeadSearchTools.search_facebook_groups,
+        LeadSearchTools.search_news,
         LeadSearchTools.open_page
     ],
     llm=llm,
@@ -132,7 +117,7 @@ lead_generation_task = Task(
     Description of the product or business for which you are doing this research: 
     <BUSINESS_DESCRIPTION>{business_description}</BUSINESS_DESCRIPTION>
 
-    Find the most relevant groups and connections for generating business leads.
+    Find the most relevant dealers, groups and connections for generating business leads.
 """,
     expected_output='A report with the most relevant leads that you found, including links to groups and profiles, and any other information that could be useful for the sales team.',
     tools=[],
@@ -170,6 +155,10 @@ def run_file1():
         else:
             st.warning('Please enter a business description.')
 
+
+
+
+# second one
 os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY_1')
 os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
@@ -525,8 +514,8 @@ import streamlit as st
 from PIL import Image
 
 # Load images (Replace these with actual file paths or URLs)
-founder1_img = Image.open("LinkedIn Photo Divyansh.jpg")
-founder2_img = Image.open("1716045696197.jpg")
+#founder1_img = Image.open("LinkedIn Photo Divyansh.jpg")
+#founder2_img = Image.open("1716045696197.jpg")
 
 
 # Home page
@@ -536,9 +525,9 @@ if selected == "Home":
 
     st.subheader("What We Offer")
     st.markdown("""
-        - **AI-Powered Lead Generation**: Harness the power of AI to identify and nurture leads.
-        - **Social Media Content Creation**: Generate engaging content for your social media platforms.
-        - **Workflow Automation**: Streamline your business processes with our AI tools.
+        - *AI-Powered Lead Generation*: Harness the power of AI to identify and nurture leads.
+        - *Social Media Content Creation*: Generate engaging content for your social media platforms.
+        - *Workflow Automation*: Streamline your business processes with our AI tools.
     """)
 
     st.subheader("Why Choose Us?")
@@ -613,8 +602,8 @@ elif selected == "Contact Us":
         st.success(f"Thank you {name}! We have received your message and will get back to you soon.")
 
     st.subheader("Other Contact Methods")
-    st.write("**Email:** reway.ewm@gmail.com")
-    st.write("**Phone:** +91 7290908877 | +91 9899115560")
+    st.write("*Email:* reway.ewm@gmail.com")
+    st.write("*Phone:* +91 7290908877 | +91 9899115560")
 
 
 
@@ -640,4 +629,3 @@ elif selected == "Marketing Roadmap":
 # Footer
 st.markdown("---")
 st.markdown("© 2024 HyperGrowth.ai All rights reserved.")
-
