@@ -6,6 +6,7 @@ import datetime
 import os
 import requests
 import json
+import sqlite3
 from concurrent.futures import ThreadPoolExecutor
 from crewai import Agent, Task, Crew, Process
 from dotenv import load_dotenv
