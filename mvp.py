@@ -32,7 +32,7 @@ load_dotenv()
 # os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
 # Initialize the LLM
-llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
+# llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
 
 class LeadSearchTools:
 
@@ -170,7 +170,7 @@ def run_file1():
 # os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
 # Initialize the LLM
-llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
+# llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
 
 
 # --------- Tools ---------#
@@ -373,7 +373,7 @@ def run_file3():
 #     tool = SerperDevTool()
 
     # os.environ["GROQ_API_KEY"] = os.getenv('GROQ_API_KEY')
-    llm3 = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
+    # llm3 = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
 
     avators = {
             "Writer": "https://cdn-icons-png.flaticon.com/512/320/320336.png",
