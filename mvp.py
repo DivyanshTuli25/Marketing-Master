@@ -6,17 +6,17 @@ import os
 import requests
 import json
 from concurrent.futures import ThreadPoolExecutor
-from crewai import Agent, Task, Crew, Process
+# from crewai import Agent, Task, Crew, Process
 from dotenv import load_dotenv
 from langchain_groq import ChatGroq
 from langchain.tools import tool
 from langchain_community.document_loaders import WebBaseLoader
 import streamlit as st
 import os
-from crewai import Crew, Process, Agent, Task
+# from crewai import Crew, Process, Agent, Task
 
 from langchain_groq import ChatGroq
-from crewai_tools import SerperDevTool
+# from crewai_tools import SerperDevTool
 from streamlit_option_menu import option_menu
 
 
@@ -91,48 +91,48 @@ class LeadSearchTools:
 
 
 # Define the Lead Generation Agent
-lead_generator = Agent(
-    role='Lead Generator',
-    goal='Identify and list potential leads from various online sources relevant to the product or business. Focus on finding buyers, sellers, dealers or groups and connections where potential customers or business partners might be active.',
-    backstory=(
-        "With expertise in social and professional networks, you excel at identifying potential leads within various online sources. Your ability to find relevant buyers and partners makes you invaluable for generating business leads."
-    ),
-    tools=[
-        LeadSearchTools.search_justdial,
-        LeadSearchTools.search_indiamart,
-        LeadSearchTools.search_facebook_groups,
-        LeadSearchTools.search_news,
-        LeadSearchTools.open_page
-    ],
-    llm=llm,
-    allow_delegation=True
-)
+# lead_generator = Agent(
+#     role='Lead Generator',
+#     goal='Identify and list potential leads from various online sources relevant to the product or business. Focus on finding buyers, sellers, dealers or groups and connections where potential customers or business partners might be active.',
+#     backstory=(
+#         "With expertise in social and professional networks, you excel at identifying potential leads within various online sources. Your ability to find relevant buyers and partners makes you invaluable for generating business leads."
+#     ),
+#     tools=[
+#         LeadSearchTools.search_justdial,
+#         LeadSearchTools.search_indiamart,
+#         LeadSearchTools.search_facebook_groups,
+#         LeadSearchTools.search_news,
+#         LeadSearchTools.open_page
+#     ],
+#     llm=llm,
+#     allow_delegation=True
+# )
 
 # Define the lead generation task
-lead_generation_task = Task(
-    description="""Identify and list potential leads from various online sources relevant to the product or business. Focus on finding groups and connections where potential customers or business partners might be active. 
+# lead_generation_task = Task(
+#     description="""Identify and list potential leads from various online sources relevant to the product or business. Focus on finding groups and connections where potential customers or business partners might be active.
+#
+#     Current date: {current_date}
+#
+#     Description of the product or business for which you are doing this research:
+#     <BUSINESS_DESCRIPTION>{business_description}</BUSINESS_DESCRIPTION>
+#
+#     Find the most relevant dealers, groups and connections for generating business leads.
+# """,
+#     expected_output='A report with the most relevant leads that you found, including links to groups and profiles, and any other information that could be useful for the sales team.',
+#     tools=[],
+#     agent=lead_generator,
+# )
 
-    Current date: {current_date}
-
-    Description of the product or business for which you are doing this research: 
-    <BUSINESS_DESCRIPTION>{business_description}</BUSINESS_DESCRIPTION>
-
-    Find the most relevant dealers, groups and connections for generating business leads.
-""",
-    expected_output='A report with the most relevant leads that you found, including links to groups and profiles, and any other information that could be useful for the sales team.',
-    tools=[],
-    agent=lead_generator,
-)
-
-def execute_lead_generation_task(inputs):
+# def execute_lead_generation_task(inputs):
     # Initialize and run the crew with the lead generation task
-    crew = Crew(
-        agents=[lead_generator],
-        tasks=[lead_generation_task],
-        process=Process.sequential,
-    )
-    result = crew.kickoff(inputs=inputs)
-    return result
+    # crew = Crew(
+    #     agents=[lead_generator],
+    #     tasks=[lead_generation_task],
+    #     process=Process.sequential,
+    # )
+    # result = crew.kickoff(inputs=inputs)
+    # return result
 def run_file1():
     st.title("💬 HyperGrowth.ai")
     st.markdown("### Delivering Superior Generative AI Marketing Services To Small Businesses Worldwide")
@@ -221,105 +221,105 @@ class SearchTools:
 # --------- Defining Agents ---------#
 
 # Define the Instagram Market Researcher agent
-market_researcher = Agent(
-    role='Instagram Market Researcher',
-    goal='Analyze industry trends, competitor activities, and popular hashtags on Instagram. Perform research on the latest trends, hashtags, and competitor activities on Instagram using your Search tools.',
-    backstory=(
-        "Armed with a keen eye for digital trends and a deep understanding of the Instagram landscape, you excel at uncovering actionable insights from social media data. "
-        "Your analytical skills are unmatched, providing a solid foundation for strategic decisions in content creation. You are great at identifying the latest trends and the best hashtags for a given campaign."
-    ),
-    tools=[
-        SearchTools.search_internet,
-        SearchTools.search_instagram,
-        SearchTools.open_page,
-    ],
-    llm=llm,
-    #max_iter=4,
-    max_rpm=4000,
-    allow_delegation=True
-)
+# market_researcher = Agent(
+#     role='Instagram Market Researcher',
+#     goal='Analyze industry trends, competitor activities, and popular hashtags on Instagram. Perform research on the latest trends, hashtags, and competitor activities on Instagram using your Search tools.',
+#     backstory=(
+#         "Armed with a keen eye for digital trends and a deep understanding of the Instagram landscape, you excel at uncovering actionable insights from social media data. "
+#         "Your analytical skills are unmatched, providing a solid foundation for strategic decisions in content creation. You are great at identifying the latest trends and the best hashtags for a given campaign."
+#     ),
+#     tools=[
+#         SearchTools.search_internet,
+#         SearchTools.search_instagram,
+#         SearchTools.open_page,
+#     ],
+#     llm=llm,
+#     #max_iter=4,
+#     max_rpm=4000,
+#     allow_delegation=True
+# )
 
 # Define the Instagram Content Strategist agent
-content_strategist = Agent(
-    role='Instagram Content Strategist',
-    goal='Develop a content calendar based on market research findings, incorporating trends, optimal posting times, and strategic content themes for next three days.',
-    backstory=(
-        "As a master planner with a creative spirit, you have a talent for envisioning a cohesive content strategy that resonates with audiences. "
-        "Your expertise in aligning content with brand voice and audience interests has consistently driven engagement and growth."
-    ),
-    tools=[],
-    max_iter=4,
-    max_rpm=4000,
-    llm=llm,
-    allow_delegation=True
-)
+# content_strategist = Agent(
+#     role='Instagram Content Strategist',
+#     goal='Develop a content calendar based on market research findings, incorporating trends, optimal posting times, and strategic content themes for next three days.',
+#     backstory=(
+#         "As a master planner with a creative spirit, you have a talent for envisioning a cohesive content strategy that resonates with audiences. "
+#         "Your expertise in aligning content with brand voice and audience interests has consistently driven engagement and growth."
+#     ),
+#     tools=[],
+#     max_iter=4,
+#     max_rpm=4000,
+#     llm=llm,
+#     allow_delegation=True
+# )
 
 # Define the Instagram Copywriter agent
-writer = Agent(
-    role='Instagram Copywriter',
-    goal='Craft engaging and relevant copy for each Instagram post, complementing the visual content and adhering to the strategic content themes.',
-    backstory=(
-        "With a flair for storytelling and a persuasive pen, you create narratives that captivate and engage the audience. Your words are the bridge between the brand and its followers, embodying the brand's voice in every caption and call to action. "
-        "Your writing is not only engaging but also incorporates all the SEO techniques, such as seamlessly using top keywords given to you and adding the best hashtags that are trending at the moment."
-    ),
-    tools=[],
-    llm=llm,
-    #max_iter=4,
-    max_rpm=4000,
-    allow_delegation=True
-)
+# writer = Agent(
+#     role='Instagram Copywriter',
+#     goal='Craft engaging and relevant copy for each Instagram post, complementing the visual content and adhering to the strategic content themes.',
+#     backstory=(
+#         "With a flair for storytelling and a persuasive pen, you create narratives that captivate and engage the audience. Your words are the bridge between the brand and its followers, embodying the brand's voice in every caption and call to action. "
+#         "Your writing is not only engaging but also incorporates all the SEO techniques, such as seamlessly using top keywords given to you and adding the best hashtags that are trending at the moment."
+#     ),
+#     tools=[],
+#     llm=llm,
+#     #max_iter=4,
+#     max_rpm=4000,
+#     allow_delegation=True
+# )
 
 # ---------- Defining task ----------#
 
-market_research = Task(
-    description="""Investigate the latest trends, hashtags, and competitor activities on Instagram specific to the industry of this Instagram account. Focus on gathering data that reveals what content performs well in the current year, identifying patterns, preferences, and emerging trends. 
+# market_research = Task(
+#     description="""Investigate the latest trends, hashtags, and competitor activities on Instagram specific to the industry of this Instagram account. Focus on gathering data that reveals what content performs well in the current year, identifying patterns, preferences, and emerging trends.
+#
+#     Current date: {current_date}
+#
+#     Description of the instagram account for which you are doing this research:
+#     <INSTAGRAM_ACCOUNT_DESCRIPTION>{instagram_description}</INSTAGRAM_ACCOUNT_DESCRIPTION>
+#
+#     Based on your research, determine and suggest the most relevant topics, hashtags and trends to use in the posts for 3 DAYS.
+#     """,
+#     expected_output='A report with the most relevant information that you found, including relevant hashtags for this week\'s content, suggested focus for next week, and all other information that could be useful to the team working on content creation.',
+#     tools=[],
+#     agent=market_researcher,
+#     output_file="market_research.md",
+# )
 
-    Current date: {current_date}
+# content_strategy = Task(
+#     description="""Based on the market research findings, develop a detailed schedule for posting Instagram posts over the next three days. The schedule should include the theme for each day, DETAILED CONTENT IDEA, and the most relevant hashtags to use for each post. Focus on what will improve customer engagement, including optimal posting times and strategies to increase interaction.
+#
+#     The schedule should cover:
+#     - Themes and post ideas for each day
+#     - Detailed description of content
+#     - Best hashtags to use for each post
+#     - Suggested posting times
+#     """,
+#     expected_output='A detailed schedule formatted as markdown, covering the next three days. Each day should include the theme, content ideas, hashtags, and suggested posting times to improve engagement.',
+#     tools=[],
+#     agent=content_strategist,
+# )
 
-    Description of the instagram account for which you are doing this research: 
-    <INSTAGRAM_ACCOUNT_DESCRIPTION>{instagram_description}</INSTAGRAM_ACCOUNT_DESCRIPTION>
-
-    Based on your research, determine and suggest the most relevant topics, hashtags and trends to use in the posts for 3 DAYS.
-    """,
-    expected_output='A report with the most relevant information that you found, including relevant hashtags for this week\'s content, suggested focus for next week, and all other information that could be useful to the team working on content creation.',
-    tools=[],
-    agent=market_researcher,
-    output_file="market_research.md",
-)
-
-content_strategy = Task(
-    description="""Based on the market research findings, develop a detailed schedule for posting Instagram posts over the next three days. The schedule should include the theme for each day, DETAILED CONTENT IDEA, and the most relevant hashtags to use for each post. Focus on what will improve customer engagement, including optimal posting times and strategies to increase interaction.
-
-    The schedule should cover:
-    - Themes and post ideas for each day
-    - Detailed description of content
-    - Best hashtags to use for each post
-    - Suggested posting times
-    """,
-    expected_output='A detailed schedule formatted as markdown, covering the next three days. Each day should include the theme, content ideas, hashtags, and suggested posting times to improve engagement.',
-    tools=[],
-    agent=content_strategist,
-)
-
-writing = Task(
-    description="""Write captivating and relevant copy for each Instagram post of the week, aligning to the strategic themes of the content calendar. The copy should engage the audience, embody the brand's voice, and encourage interaction. The copy should also be SEO-friendly and incorporate the relevant keywords and hashtags contained in the content schedule. 
-
-    Consider the following guidelines when writing the copy:
-    - Keep the copy concise and engaging.
-    - Include a call to action where appropriate.
-    - Use relevant keywords and hashtags.
-    - Ensure the copy aligns with the brand's voice and tone.
-    """,
-    expected_output='A document formatted as markdown, with several sections. Each section should contain the copy for a single Instagram post, along with the relevant hashtags and calls to action. The copy should be engaging, on-brand, and aligned with the content calendar.',
-    tools=[],
-    agent=writer,
-)
-
-crew = Crew(
-    agents=[market_researcher,writer],
-    tasks=[market_research, writing],
-    process=Process.sequential,
-)
+# writing = Task(
+#     description="""Write captivating and relevant copy for each Instagram post of the week, aligning to the strategic themes of the content calendar. The copy should engage the audience, embody the brand's voice, and encourage interaction. The copy should also be SEO-friendly and incorporate the relevant keywords and hashtags contained in the content schedule.
+#
+#     Consider the following guidelines when writing the copy:
+#     - Keep the copy concise and engaging.
+#     - Include a call to action where appropriate.
+#     - Use relevant keywords and hashtags.
+#     - Ensure the copy aligns with the brand's voice and tone.
+#     """,
+#     expected_output='A document formatted as markdown, with several sections. Each section should contain the copy for a single Instagram post, along with the relevant hashtags and calls to action. The copy should be engaging, on-brand, and aligned with the content calendar.',
+#     tools=[],
+#     agent=writer,
+# )
+#
+# crew = Crew(
+#     agents=[market_researcher,writer],
+#     tasks=[market_research, writing],
+#     process=Process.sequential,
+# )
 def run_file2():
     # Streamlit UI
     st.title("💬 HyperGrowth.ai")
@@ -347,29 +347,30 @@ def run_file2():
 
 
 def run_file3():
-    tool = SerperDevTool()
+    st.write("Marketing Roadmap Generator AI")
+    # tool = SerperDevTool()
 
-    # Page Configuration
-    # st.set_page_config(page_title="Zyper.ai", page_icon="💬", layout="wide")
-
-    # Title and Description
+#     # Page Configuration
+#     # st.set_page_config(page_title="Zyper.ai", page_icon="💬", layout="wide")
+#
+#     # Title and Description
     st.title("💬 HyperGrowth.ai")
     st.markdown("### Delivering Superior Generative AI Marketing Services To Small Businesses Worldwide")
-
-    # Sidebar for Navigation
-    # with st.sidebar:
-    #     selected = option_menu(
-    #         "Main Menu",
-    #         ["Home", "About", "Contact"],
-    #         icons=["house", "info-circle", "envelope"],
-    #         menu_icon="cast",
-    #         default_index=0,
-    #     )
-
-
-    # if selected == "Home":
-        # Initialize the tool for internet searching capabilities
-    tool = SerperDevTool()
+#
+#     # Sidebar for Navigation
+#     # with st.sidebar:
+#     #     selected = option_menu(
+#     #         "Main Menu",
+#     #         ["Home", "About", "Contact"],
+#     #         icons=["house", "info-circle", "envelope"],
+#     #         menu_icon="cast",
+#     #         default_index=0,
+#     #     )
+#
+#
+#     # if selected == "Home":
+#         # Initialize the tool for internet searching capabilities
+#     tool = SerperDevTool()
 
     os.environ["GROQ_API_KEY"] = os.getenv('GROQ_API_KEY')
     llm3 = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
@@ -379,33 +380,33 @@ def run_file3():
             "Reviewer": "https://cdn-icons-png.freepik.com/512/9408/9408201.png"
         }
 
-    industry_researcher = Agent(
-            name="Industry Researcher",
-            role="Research",
-            goal="Provide comprehensive research on the specific industry of the client",
-            backstory=f"Designed to gather up-to-date and relevant information to help tailor the marketing strategy to industry trends and benchmarks",
-            verbose=True,
-            llm=llm,
-            allow_delegation=True,
-            tools=[tool],
-            # max_iter = 7,
-            # max_rpm = 4000
-        )
+    # industry_researcher = Agent(
+    #         name="Industry Researcher",
+    #         role="Research",
+    #         goal="Provide comprehensive research on the specific industry of the client",
+    #         backstory=f"Designed to gather up-to-date and relevant information to help tailor the marketing strategy to industry trends and benchmarks",
+    #         verbose=True,
+    #         llm=llm,
+    #         allow_delegation=True,
+    #         tools=[tool],
+    #         # max_iter = 7,
+    #         # max_rpm = 4000
+    #     )
 
         # Define the Marketing Roadmap Agent
-    roadmap_creator = Agent(
-            name="Roadmap Creator",
-            role="Marketing",
-            goal="Develop a detailed and actionable marketing roadmap based on the client's industry, size, budget, and team capacity",
-            backstory="An expert marketer with extensive knowledge in crafting strategies that align with business goals and market dynamics",
-            verbose=True,
-            llm=llm,
-            allow_delegation=False,
-            tools=[],
-            # max_iter=7,
-            # max_rpm=4000
-
-        )
+    # roadmap_creator = Agent(
+    #         name="Roadmap Creator",
+    #         role="Marketing",
+    #         goal="Develop a detailed and actionable marketing roadmap based on the client's industry, size, budget, and team capacity",
+    #         backstory="An expert marketer with extensive knowledge in crafting strategies that align with business goals and market dynamics",
+    #         verbose=True,
+    #         llm=llm,
+    #         allow_delegation=False,
+    #         tools=[],
+    #         # max_iter=7,
+    #         # max_rpm=4000
+    #
+    #     )
 
     st.markdown("#### HyperGrow - Marketing Roadmap - Your roadmap to business grwoth")
 
@@ -451,34 +452,34 @@ def run_file3():
         st.chat_message("user").write(prompt)
 
             # Define the tasks
-        gather_industry_insights = Task(
-                    description=f"Collect detailed information about the specific {prompt} industry, including current trends, benchmarks,competitor research on {competitors} and best practices specific for the location - {location} by using the following keywords {keywords}.",
-                    agent=industry_researcher,
-                    expected_output="""
-                        "industry_trends": "A report on current industry trends",
-                        "benchmarks": "Benchmark data for the industry",
-                        "best_practices": "List of best practices relevant to the industry"
-                    """
-                )
-
-        develop_marketing_strategy = Task(
-                    description=f"Use the gathered insights to create a comprehensive marketing strategy for {prompt} based on the business goals of -  {business_goals},and provided marketing budget of {marketing_budget}. Make the business plan relevant to the location - {location} provided."
-            "Also provide a marketing budget allocation ",
-                    agent=roadmap_creator,
-                    expected_output=
-                    """
-                        "marketing_goals": "A list of measurable and time-bound marketing goals based on the industry and user needs",
-                        "initiatives": "Detailed description of marketing initiatives",
-                        "schedule": "Chronological schedule of marketing activities",
-                        "activities": "List of marketing activities",
-                        "status_tracking": "Method for tracking the status of goals, initiatives, and activities"
-                    """
-                )
-        crew = Crew(
-                    agents=[industry_researcher, roadmap_creator],
-                    tasks=[gather_industry_insights, develop_marketing_strategy],
-                    process=Process.sequential,
-                )
+        # gather_industry_insights = Task(
+        #             description=f"Collect detailed information about the specific {prompt} industry, including current trends, benchmarks,competitor research on {competitors} and best practices specific for the location - {location} by using the following keywords {keywords}.",
+        #             agent=industry_researcher,
+        #             expected_output="""
+        #                 "industry_trends": "A report on current industry trends",
+        #                 "benchmarks": "Benchmark data for the industry",
+        #                 "best_practices": "List of best practices relevant to the industry"
+        #             """
+        #         )
+        #
+        # develop_marketing_strategy = Task(
+        #             description=f"Use the gathered insights to create a comprehensive marketing strategy for {prompt} based on the business goals of -  {business_goals},and provided marketing budget of {marketing_budget}. Make the business plan relevant to the location - {location} provided."
+        #     "Also provide a marketing budget allocation ",
+        #             agent=roadmap_creator,
+        #             expected_output=
+        #             """
+        #                 "marketing_goals": "A list of measurable and time-bound marketing goals based on the industry and user needs",
+        #                 "initiatives": "Detailed description of marketing initiatives",
+        #                 "schedule": "Chronological schedule of marketing activities",
+        #                 "activities": "List of marketing activities",
+        #                 "status_tracking": "Method for tracking the status of goals, initiatives, and activities"
+        #             """
+        #         )
+        # crew = Crew(
+        #             agents=[industry_researcher, roadmap_creator],
+        #             tasks=[gather_industry_insights, develop_marketing_strategy],
+        #             process=Process.sequential,
+        #         )
 
 
 
