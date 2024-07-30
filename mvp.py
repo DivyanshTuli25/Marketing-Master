@@ -144,16 +144,23 @@ def run_file1():
     current_date = st.date_input('Enter the current date:', datetime.date.today())
 
     if st.button('Execute Lead Generation Task'):
-        if business_description:
-            inputs = {
-                'current_date': current_date.strftime('%Y/%m/%d'),
-                'business_description': business_description,
-            }
-            with st.spinner('Executing task...'):
-                result = execute_lead_generation_task(inputs)
-            st.markdown(result)
-        else:
-            st.warning('Please enter a business description.')
+        st.write("This is HyperGrowAI agent, for Lead Generation")
+        # with st.spinner('Generating strategy...'):
+        #     crew.kickoff(inputs=inputs)
+
+        # Read and display the content of market_research.md
+        #
+
+        # if business_description:
+        #     inputs = {
+        #         'current_date': current_date.strftime('%Y/%m/%d'),
+        #         'business_description': business_description,
+        #     }
+        #     # with st.spinner('Executing task...'):
+        #     #     result = execute_lead_generation_task(inputs)
+        #     # st.markdown(result)
+    # else:
+    #     st.write("This is HyperGrowAI agent, for Lead Generation")
 
 
 
@@ -327,20 +334,15 @@ def run_file2():
             'current_date': current_date.strftime('%Y/%m/%d'),
             'instagram_description': instagram_description
         }
+        print("This is HyperGrowAI agent, for Instagram Marketing Strategy Generation")
 
-        with st.spinner('Generating strategy...'):
-            crew.kickoff(inputs=inputs)
+        # with st.spinner('Generating strategy...'):
+        #     crew.kickoff(inputs=inputs)
 
         # Read and display the content of market_research.md
-        with open('market_research.md', 'r') as file:
-            market_research_content = file.read()
-
-        st.markdown("### Market Research Report")
-        st.markdown(market_research_content)
-
-        st.markdown("### Final Result")
-        result = crew.kickoff(inputs=inputs)
-        st.markdown(result)
+        #
+    else:
+        print("This is HyperGrowAI agent, for Instagram Marketing Generation")
 
 
 
@@ -477,13 +479,23 @@ def run_file3():
                     tasks=[gather_industry_insights, develop_marketing_strategy],
                     process=Process.sequential,
                 )
-        final = crew.kickoff()
 
-        result = f"## Here is the Final Result \n\n {final}"
 
-                # Display result in beautiful format
-        st.markdown("## Analysis Result")
-        st.write(result)
+
+        with st.spinner('Generating strategy...'):
+            st.write("This is HyperGrowAI agent, for Marketing Strategy & Roadmap Generation")
+        #     crew.kickoff(inputs=inputs)
+
+        # Read and display the content of market_research.md
+        #
+
+        # final = crew.kickoff()
+        #
+        # result = f"## Here is the Final Result \n\n {final}"
+        #
+        #         # Display result in beautiful format
+        # st.markdown("## Analysis Result")
+        # st.write(result)
 
     # elif selected == "About":
     #     st.markdown("### About Zyper.ai")
