@@ -28,8 +28,8 @@ st.set_page_config(page_title="HyperGrowth.AI", page_icon=":robot_face:", layout
 load_dotenv()
 
 # Set API keys
-os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY_2')
-os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
+# os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY_2')
+# os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
 # Initialize the LLM
 llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
@@ -166,8 +166,8 @@ def run_file1():
 
 
 # second one
-os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY_1')
-os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
+# os.environ['GROQ_API_KEY'] = os.getenv('GROQ_API_KEY_1')
+# os.environ['SERPER_API_KEY'] = os.getenv('SERPER_API_KEY')
 
 # Initialize the LLM
 llm = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
@@ -372,7 +372,7 @@ def run_file3():
 #         # Initialize the tool for internet searching capabilities
 #     tool = SerperDevTool()
 
-    os.environ["GROQ_API_KEY"] = os.getenv('GROQ_API_KEY')
+    # os.environ["GROQ_API_KEY"] = os.getenv('GROQ_API_KEY')
     llm3 = ChatGroq(temperature=0.2, model_name="llama3-70b-8192")
 
     avators = {
